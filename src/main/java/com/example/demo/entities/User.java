@@ -3,7 +3,9 @@ package com.example.demo.entities;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,24 +21,27 @@ import javax.persistence.Transient;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JoinColumn(name = "user_id")
+	@Column(name = "user_id")
 	private int id;
 	
-	@JoinColumn(name = "user_name")
+	@Column(name = "user_name")
 	private String name;
 	
-	@JoinColumn(name = "user_email")
+	@Column(name = "user_email")
 	private String email;
 	
-	@JoinColumn(name = "user_date")
+	@Column(name = "user_password")
+	private String password;
+	
+	@Column(name = "user_date")
 	private LocalDate date;
 	
 	@Transient
-	@JoinColumn(name = "user_age")
+	@Column(name = "user_age")
 	private Integer age;
 	
 	@ManyToMany
-	@JoinTable(name = "user_role",
+	@JoinTable(name = "users_roles",
 			      joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
 			      inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
 	private List<Role> roles;
@@ -46,14 +51,19 @@ public class User {
 		super();
 	}
 
-	public User(int id, String name, String email, LocalDate date) {
+
+	public User(int id, String name, String email, String password, LocalDate date, Integer age, List<Role> roles) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.date = date;
-	
+		this.age = age;
+		this.roles = roles;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -79,6 +89,14 @@ public class User {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public LocalDate getDate() {
 		return date;
 	}
@@ -93,6 +111,14 @@ public class User {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	@Override

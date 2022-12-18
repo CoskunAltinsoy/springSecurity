@@ -27,7 +27,7 @@ public class UserService {
 	
 	public void addUser(User user) {
 		Optional<User> userOptional = 
-				userRepository.findStudentByEmail(user.getEmail());
+				userRepository.findUserByEmail(user.getEmail());
 		if (userOptional.isPresent()) {
 			throw new IllegalStateException("email taken");
 		}
@@ -55,8 +55,8 @@ public class UserService {
 //		}
 		
 		if (user.getEmail() != null && !Objects.equals(userOp.get().getEmail(), user.getEmail())) {
-			Optional<User> studentOptional = userRepository.findStudentByEmail(user.getEmail());
-			if(studentOptional.isPresent()) {
+			Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
+			if(userOptional.isPresent()) {
 				throw new IllegalStateException("email taken");
 			}
 			userOp.get().setName(user.getName());

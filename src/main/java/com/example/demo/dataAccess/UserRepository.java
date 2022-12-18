@@ -11,6 +11,8 @@ import com.example.demo.entities.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	@Query(value = "Select s from users u where u.user_email = ?1",nativeQuery = true)
-	Optional<User> findStudentByEmail(String email);
+	@Query(value = "Select u from users u where u.user_email = ?1",nativeQuery = true)
+	Optional<User> findUserByEmail(String email);
+	
+	User findByName(String username);
 }
