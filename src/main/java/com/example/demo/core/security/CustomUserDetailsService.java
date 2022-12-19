@@ -12,13 +12,9 @@ import com.example.demo.entities.User;
 @Service
 public class CustomUserDetailsService implements UserDetailsService{
 	
-	private UserRepository userRepository;
 	@Autowired
-	public CustomUserDetailsService(UserRepository userRepository) {
-		super();
-		this.userRepository = userRepository;
-	}
-
+	private UserRepository userRepository;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = this.userRepository.findByName(username);
