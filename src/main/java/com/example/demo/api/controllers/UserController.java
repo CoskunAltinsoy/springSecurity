@@ -17,7 +17,7 @@ import com.example.demo.business.UserService;
 import com.example.demo.entities.User;
 
 @RestController
-@RequestMapping(path = "api/user/")
+@RequestMapping(path = "api/users/")
 public class UserController {
 	
 	private final UserService userService;

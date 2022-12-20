@@ -13,7 +13,7 @@ import com.example.demo.business.RoleService;
 import com.example.demo.entities.Role;
 
 @RestController
-@RequestMapping(path = "api/role/")
+@RequestMapping(path = "api/roles/")
 public class RoleController {
 
 	private final RoleService roleService;
@@ -29,7 +29,7 @@ public class RoleController {
 	}
 	
 	@PostMapping("add")
-	public void registerUser(@RequestBody Role role) {
+	public void addRole(@RequestBody Role role) {
 		this.roleService.addRole(role);
 	}
 	
